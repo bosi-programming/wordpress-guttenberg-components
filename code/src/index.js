@@ -1,5 +1,4 @@
 import { registerBlockType } from "@wordpress/blocks";
-import { RichText } from "@wordpress/block-editor";
 
 registerBlockType("bosi-backend-blocks/code", {
   title: "code",
