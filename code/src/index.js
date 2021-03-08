@@ -27,7 +27,7 @@ registerBlockType("bosi-backend-blocks/code", {
       <div className="nes-container is-rounded is-dark">
         <RichText
           placeholder="Add your quote here"
-          tagName="p"
+          tagName="pre"
           onChange={onChangeQuote}
           value={quote}
         />
@@ -38,7 +38,7 @@ registerBlockType("bosi-backend-blocks/code", {
     return (
       <div className="nes-container is-rounded is-dark">
         <RichText.Content
-          tagName="p"
+          tagName="pre"
           value={props.attributes.quote}
         />
       </div>
