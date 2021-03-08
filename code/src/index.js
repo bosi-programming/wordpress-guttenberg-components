@@ -4,11 +4,17 @@ import { RichText } from "@wordpress/block-editor";
 registerBlockType("bosi-backend-blocks/code", {
   title: "code",
   icon: "align-center",
-  category: "common",
+  category: "text",
   attributes: {
     quote: {
       type: "string",
+      source: "html",
+      selector: "code",
     },
+  },
+  supports: {
+    anchor: true,
+    fontSize: true,
   },
   example: {
     attributes: {
@@ -20,27 +26,39 @@ registerBlockType("bosi-backend-blocks/code", {
       attributes: { quote },
       setAttributes,
     } = props;
-    const onChangeQuote = (newQuote) => {
-      setAttributes({ quote: newQuote });
+    const onChangeQuote = (e) => {
+      setAttributes({ quote: e.target.innerText.toString() });
     };
     return (
       <div className="nes-container is-rounded is-dark">
-        <RichText
-          placeholder="Add your quote here"
-          tagName="pre"
-          onChange={onChangeQuote}
-          value={quote}
-        />
+        <pre>
+          <code
+            onKeyUp={(e) => onChangeQuote(e)}
+            onInput={(e) => onChangeQuote(e)}
+            role="textbox"
+            aria-multiline="true"
+            aria-label="Code"
+            contenteditable="true"
+          >
+            {quote}
+          </code>
+        </pre>
       </div>
     );
   },
   save: (props) => {
     return (
       <div className="nes-container is-rounded is-dark">
-        <RichText.Content
-          tagName="pre"
-          value={props.attributes.quote}
-        />
+        <pre>
+          <code
+            role="textbox"
+            aria-multiline="true"
+            aria-label="Code"
+            contenteditable="true"
+          >
+            {props.attributes.quote}
+          </code>
+        </pre>
       </div>
     );
   },
